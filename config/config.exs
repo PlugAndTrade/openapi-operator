@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :kube_openapi_controller, key: :value
+#     config :open_api, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:kube_openapi_controller, :key)
+#     Application.get_env(:open_api, :key)
 #
 # You can also configure a 3rd-party app:
 #
@@ -28,3 +28,9 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env()}.exs"
+
+config :open_api,
+  k8s: [
+    api_server: {:system, "K8S_API_SERVER", "http://localhost:8001"},
+    mode: {:system, :atom, "K8S_MODE", :proxy}
+  ]

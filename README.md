@@ -5,17 +5,17 @@
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `kube_openapi_controller` to your list of dependencies in `mix.exs`:
+by adding `open_api` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:kube_openapi_controller, "~> 0.1.0"}
+    {:open_api, "~> 0.1.0"}
   ]
 end
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/kube_openapi_controller](https://hexdocs.pm/kube_openapi_controller).
+be found at [https://hexdocs.pm/open_api](https://hexdocs.pm/open_api).
 

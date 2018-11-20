@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-service
+  annotations:
+    "swagger.io/docs": "true"
+    "swagger.io/path": "/swagger/docs/swagger.json"
+    "swagger.io/version": "v2"
+spec:
+  selector:
+    app: test-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
