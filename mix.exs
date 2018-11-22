@@ -24,6 +24,8 @@ defmodule OpenAPI.MixProject do
     [
       {:kazan, "~> 0.10"},
       {:confex, "~> 3.3.1"},
+      {:yaml_elixir, "~> 2.1.0"},
+      {:poison, "~> 4.0.1"},
       {:httpoison, "~> 1.4"},
       {:netex,
        git: "https://github.com/drowzy/netex", ref: "050b4226d0aab068b0a5eef4158ba1c9303c73ac"},

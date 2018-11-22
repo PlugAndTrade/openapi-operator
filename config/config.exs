@@ -33,4 +33,7 @@ config :open_api,
   k8s: [
     api_server: {:system, "K8S_API_SERVER", "http://localhost:8001"},
     mode: {:system, :atom, "K8S_MODE", :proxy}
+  ],
+  template: [
+    path: {:system, "TEMPLATE_BASE_PATH", "priv/templates/base.yaml.eex"}
   ]

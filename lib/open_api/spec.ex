@@ -24,6 +24,10 @@ defmodule OpenAPI.Spec do
     "#{name}.#{namespace}.svc.cluster.local"
   end
 
+  def url(%__MODULE__{port: port, path: path} = s) do
+    "http://#{fqdn(s)}:#{port}#{path}"
+  end
+
   def is_target?(%Service{metadata: %ObjectMeta{annotations: nil}}), do: false
 
   def is_target?(%Service{metadata: %ObjectMeta{annotations: annotations}}) do

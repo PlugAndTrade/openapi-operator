@@ -11,7 +11,13 @@ defmodule OpenAPI.Specs do
   end
 
   def get_spec(name, ns) do
-    Agent.get(__MODULE__, &Map.get(&1, Spec.fqdn(name, ns)))
+    name
+    |> Spec.fqdn(ns)
+    |> get_spec()
+  end
+
+  def get_spec(fqdn) do
+    Agent.get(__MODULE__, &Map.get(&1, fqdn))
   end
 
   def remove_spec(%Spec{} = s) do
