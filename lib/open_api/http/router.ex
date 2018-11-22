@@ -4,7 +4,7 @@ defmodule OpenAPI.HTTP.Router do
   require Logger
 
   alias OpenAPI.HTTP.Render
-  alias OpenAPI.{Spec, Specs}
+  alias OpenAPI.{Spec, Specs, Proxy}
 
   plug(Plug.Logger, log: :debug)
   plug(:match)
@@ -29,19 +29,32 @@ defmodule OpenAPI.HTTP.Router do
   end
 
   get "/swagger.json" do
-    apis = Specs.take_all()
-    |> Enum.map(fn s -> {Spec.name(s), Spec.url(s)} end)
-    cout = OpenAPI.Template.Renderer.compile(apis: apis)
-
-    Logger.info("#{__MODULE__} :: Rendering APIS #{inspect(apis)} #{inspect(cout)}")
+    body =
+      [
+        apis: Enum.map(Specs.take_all(), &{Spec.name(&1), "/#{Spec.fqdn(&1)}/swagger.json"})
+      ]
+      |> OpenAPI.Template.Renderer.compile()
+      |> Poison.encode!()
 
     conn
     |> Plug.Conn.put_resp_content_type("application/json")
-    |> Plug.Conn.send_resp(200, Poison.encode!(cout))
+    |> Plug.Conn.send_resp(200, body)
   end
 
   get "/:fqdn/swagger.json" do
-    send_file(conn, 200, "priv/static/test.swagger.json")
+    with %Spec{} = s <- Specs.get_spec(fqdn),
+         {:ok, body} <- Proxy.request(s) do
+      conn
+      |> Plug.Conn.put_resp_content_type("application/json")
+      |> Plug.Conn.send_resp(200, body)
+    else
+      nil ->
+        send_resp(conn, 404, "Not found")
+
+      {:error, reason} ->
+        Logger.error("#{__MODULE__} :: Proxy to #{fqdn} Swagger docs failed with: #{reason}")
+        send_resp(conn, 500, "Error #{inspect(reason)}")
+    end
   end
 
   match _ do

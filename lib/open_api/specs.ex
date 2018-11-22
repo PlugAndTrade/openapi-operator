@@ -20,6 +20,10 @@ defmodule OpenAPI.Specs do
     Agent.get(__MODULE__, &Map.get(&1, fqdn))
   end
 
+  def has?(fqdn) do
+    Agent.get(__MODULE__, &Map.has_key?(&1, fqdn))
+  end
+
   def remove_spec(%Spec{} = s) do
     remove_spec(Spec.fqdn(s))
   end
