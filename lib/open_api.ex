@@ -20,7 +20,8 @@ defmodule OpenAPI do
         []
       ]),
       {OpenAPI.Specs, []},
-      {OpenAPI.HTTP.Supervisor, port: 4000}
+      {OpenAPI.HTTP.Supervisor, port: 4000},
+      {OpenAPI.Template.Supervisor, []}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: OpenAPI.Supervisor)

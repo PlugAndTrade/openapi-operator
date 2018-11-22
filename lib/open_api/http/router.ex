@@ -1,14 +1,10 @@
 defmodule OpenAPI.HTTP.Router do
   use Plug.Router
   use Plug.ErrorHandler
+  require Logger
 
   alias OpenAPI.HTTP.Render
   alias OpenAPI.{Spec, Specs}
-
-  plug(Plug.Static,
-    at: "/",
-    from: {:open_api, "priv/static"}
-  )
 
   plug(Plug.Logger, log: :debug)
   plug(:match)
@@ -33,7 +29,15 @@ defmodule OpenAPI.HTTP.Router do
   end
 
   get "/swagger.json" do
-    send_file(conn, 200, "priv/static/swagger.json")
+    apis = Specs.take_all()
+    |> Enum.map(fn s -> {Spec.name(s), Spec.url(s)} end)
+    cout = OpenAPI.Template.Renderer.compile(apis: apis)
+
+    Logger.info("#{__MODULE__} :: Rendering APIS #{inspect(apis)} #{inspect(cout)}")
+
+    conn
+    |> Plug.Conn.put_resp_content_type("application/json")
+    |> Plug.Conn.send_resp(200, Poison.encode!(cout))
   end
 
   get "/:fqdn/swagger.json" do

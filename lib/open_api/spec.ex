@@ -25,8 +25,11 @@ defmodule OpenAPI.Spec do
   end
 
   def url(%__MODULE__{port: port, path: path} = s) do
-    "http://#{fqdn(s)}:#{port}#{path}"
+    "http://#{fqdn(s)}:#{port || 80}#{path}"
   end
+
+  def name(%__MODULE__{name: nil, metadata: %ObjectMeta{name: n}}), do: n
+  def name(%__MODULE__{name: n}), do: n
 
   def is_target?(%Service{metadata: %ObjectMeta{annotations: nil}}), do: false
 
