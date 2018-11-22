@@ -1,0 +1,51 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: <%= host %>
+basePath: /v2
+info:
+  description: |
+    This is a sample OpenAPI base template.
+    You can find out more about OpenAPI (previously swagger) at
+    [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).
+
+    # Introduction
+    Either provided your own base `swagger.yaml` to replace this template or use env variables
+    to customize this template:
+
+    | ENV                                      | Description     |
+    | -------------                            | :-------------: |
+    | `"OPEN_API_TEMPLATE_TITLE"`              | Title           |
+    | `"OPEN_API_TEMPLATE_DESCRIPTION"`        | Description     |
+
+    # How it works
+    The controller listens for changes to any k8s services which has the annotation:
+    ```yaml
+    swagger.io/docs: true
+    ```
+    Based on the parsed service annotations a list of API:s are injected to this document.
+    (in the bottom of `info.description`).
+    Any requests for the annoted service swagger docs are proxied and rendered by the controller.
+    Removing the service annotations, the service or setting `swagger.io/docs: false` will result in the
+    API being removed from this document
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version: v1
+  title: <%= title %>
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: dev@plug-n-trade.com
+    url: https://github.com/plugntrade/openapi-operator
+  x-logo:
+    url: 'http://plug-n-trade.com/img/about/pnt_ampersand.png'
+  license:
+    name: TBA
+    url: ''
+externalDocs:
+  description: Find out how to create Github repo for your OpenAPI spec.
+  url: 'https://github.com/Rebilly/generator-openapi-repo'
+x-servers:
+  - url: //example.io/v2
+    description: Default server
+  - url: //exmaple.io/sandbox
+    description: Sandbox server
