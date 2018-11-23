@@ -35,5 +35,10 @@ config :open_api,
     mode: {:system, :atom, "K8S_MODE", :proxy}
   ],
   template: [
-    path: {:system, "TEMPLATE_BASE_PATH", "priv/templates/base.yaml.eex"}
+    file: {:system, "TEMPLATE_FILE_PATH", "priv/templates/base.yaml.eex"},
+    title: {:system, "OPEN_API_TEMPLATE_TITLE", "OpenAPI Example"},
+    host: {:system, "OPEN_API_TEMPLATE_HOST", "api-openapi.example.com"},
+    base_path: {:system, "OPEN_API_TEMPLATE_BASEPATH", "/"},
+    version: {:system, "OPEN_API_TEMPLATE_VERSION", "v1"},
+    x_logo_url: {:system, "OPEN_API_TEMPLATE_LOG_URL", "http://plug-n-trade.com/img/about/pnt_ampersand.png"}
   ]

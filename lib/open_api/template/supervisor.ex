@@ -7,9 +7,11 @@ defmodule OpenAPI.Template.Supervisor do
   end
 
   def init(opts) do
+    Logger.info("#{__MODULE__} :: opts #{inspect opts}")
+    {file, params} = Keyword.pop(opts, :file)
+
     children = [
-      {OpenAPI.Template.Renderer,
-       [file: "priv/templates/base.yaml.eex", params: [title: "api.host.se", host: "api.host.se"]]},
+      {OpenAPI.Template.Renderer, [file: file, params: params]},
       {OpenAPI.Template.Inject, [["info", "description"]]}
     ]
 

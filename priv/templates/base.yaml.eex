@@ -3,7 +3,7 @@ schemes:
   - http
   - https
 host: <%= host %>
-basePath: /v2
+basePath: <%= base_path %>
 info:
   description: |
     This is a sample OpenAPI base template.
@@ -37,7 +37,7 @@ info:
     email: dev@plug-n-trade.com
     url: https://github.com/plugntrade/openapi-operator
   x-logo:
-    url: 'http://plug-n-trade.com/img/about/pnt_ampersand.png'
+    url: <%= x_logo_url %>
   license:
     name: TBA
     url: ''

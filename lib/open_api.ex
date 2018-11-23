@@ -14,6 +14,8 @@ defmodule OpenAPI do
       |> Confex.fetch_env!(:k8s)
       |> configure()
 
+    template_conf = Confex.fetch_env!(:open_api, :template)
+
     children = [
       OpenAPI.Controller.child_spec([
         conn,
@@ -21,7 +23,7 @@ defmodule OpenAPI do
       ]),
       {OpenAPI.Specs, []},
       {OpenAPI.HTTP.Supervisor, port: 4000},
-      {OpenAPI.Template.Supervisor, []}
+      {OpenAPI.Template.Supervisor, template_conf}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: OpenAPI.Supervisor)

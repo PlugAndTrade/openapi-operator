@@ -4,8 +4,12 @@ defmodule OpenAPI.TemplateTest do
   alias OpenAPI.Template
 
   setup do
-    conf = [host: "test", title: "test"]
-    t = Template.from_file("priv/templates/base.yaml.eex", conf)
+
+    {file, params} = :open_api
+      |> Confex.fetch_env!(:template)
+      |> Keyword.pop(:file)
+
+    t = Template.from_file(file, params)
 
     {:ok, %{template: t}}
   end
