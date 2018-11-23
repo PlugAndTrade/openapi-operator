@@ -30,7 +30,8 @@ defmodule OpenAPI.MixProject do
       {:netex,
        git: "https://github.com/drowzy/netex", ref: "050b4226d0aab068b0a5eef4158ba1c9303c73ac"},
       {:plug, "~> 1.7"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:distillery, "~> 2.0", runtime: false}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
     ]
