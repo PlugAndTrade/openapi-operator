@@ -1,9 +1,10 @@
 # OpenAPI Operator
 
-**TODO: Add description**
+A OpenAPI (swagger) spec combiner for kubernetes
 
-Merges `swagger` definitions based on service annotations. K8s services with the `swagger.io/docs` annotation set
-are merged with a base template. The UI is rendered using [ReDoc](https://github.com/Rebilly/ReDoc)
+Finds specs by finding k8s services with the `swagger.io/docs` annotation set.
+Service urls are injected into a base template as a markdown list. Requests for
+a specific specification is reverse proxied to the target. The UI is rendered using [ReDoc](https://github.com/Rebilly/ReDoc)
 
 ## Configure targets
 Swagger docs are based on annotations the following annotations are available:
@@ -15,6 +16,8 @@ Swagger docs are based on annotations the following annotations are available:
 | `"swagger.io/version"` | Swagger version. default `v2`                  | `<string>`    |
 | `"swagger.io/port"`    | Http port. default `80`                        | `<int>`       |
 
+## Configure the operator
+### TODO
 ## Developing
 
 ### Prerequisites
