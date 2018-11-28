@@ -6,8 +6,25 @@ Finds specs by finding k8s services with the `swagger.io/docs` annotation set.
 Service urls are injected into a base template as a markdown list. Requests for
 a specific specification is reverse proxied to the target. The UI is rendered using [ReDoc](https://github.com/Rebilly/ReDoc)
 
+## Configure
+
+The following environment variables are available to customize the template:
+
+| Env                           | Description                                                                             | Values        |
+| -------------                 | :-------------:                                                                         | -----:        |
+| `OPEN_API_TEMPLATE_FILE_PATH` | Path to a `swagger.yaml` to use a base template. default `priv/tmeplates/base.yaml.eex` | `<file_path>` |
+| `OPEN_API_TEMPLATE_TITLE`     | Base template title. default: `OpenAPI example`                                         | `<string>`    |
+| `OPEN_API_TEMPLATE_HOST`      | Base template host. default `api-openapi.example.com`                                   | `<string>`    |
+| `OPEN_API_TEMPLATE_BASEPATH`  | Base template basepath. default `/`                                                     | `<url_path>`  |
+| `OPEN_API_TEMPLATE_LOGO_URL`  | Logo url. default `http://plug-n-trade.com/img/about/pnt_ampersand.png`                 | `<url>`       |
+| `OPEN_API_TEMPLATE_VERSION`   | Base template API version. default `v1`                                                 | `<string>`    |
+
+The following environment variables are available for runtime configuration:
+
+### Base Template
+* TODO
 ## Configure targets
-Swagger docs are based on annotations the following annotations are available:
+| ## Configure targets |
 
 | Annotation             | Description                                    | Values        |
 | -------------          | :-------------:                                | -----:        |
@@ -16,7 +33,6 @@ Swagger docs are based on annotations the following annotations are available:
 | `"swagger.io/version"` | Swagger version. default `v2`                  | `<string>`    |
 | `"swagger.io/port"`    | Http port. default `80`                        | `<int>`       |
 
-## Configure the operator
 ### TODO
 ## Developing
 
