@@ -7,13 +7,14 @@ defmodule OpenAPI.Template.Supervisor do
   end
 
   def init(opts) do
-    Logger.info("#{__MODULE__} :: opts #{inspect opts}")
     {file, params} = Keyword.pop(opts, :file)
 
     children = [
       {OpenAPI.Template.Renderer, [file: file, params: params]},
       {OpenAPI.Template.Inject, [["info", "description"]]}
     ]
+
+    Logger.info(fn -> "[#{__MODULE__}] :: OpenAPI templating up!" end, ansi_color: :magenta)
 
     Supervisor.init(children, strategy: :one_for_one)
   end

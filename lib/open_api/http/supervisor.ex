@@ -9,7 +9,6 @@ defmodule OpenAPI.HTTP.Supervisor do
   def init(opts) do
     port = Keyword.get(opts, :port, 4000)
 
-    Logger.info(fn -> "[#{__MODULE__}] :: Starting HTTP server on port #{port}" end)
 
     children = [
       Plug.Cowboy.child_spec(
@@ -18,6 +17,8 @@ defmodule OpenAPI.HTTP.Supervisor do
         options: [port: port, timeout: 70_000]
       )
     ]
+
+    Logger.info(fn -> "[#{__MODULE__}] :: Starting HTTP server on port #{port}" end, ansi_color: :magenta)
 
     Supervisor.init(children, strategy: :one_for_one)
   end

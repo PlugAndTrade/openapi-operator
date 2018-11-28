@@ -10,6 +10,6 @@ defmodule OpenAPI.Template.Inject do
 
   def run([path]) do
     :ok = OpenAPI.Template.Renderer.inject(path, @template, "")
-    Logger.info("#{__MODULE__} :: Base template injected with: #{@template}")
+    Logger.info(fn -> "#{__MODULE__} :: Base template injected with: #{inspect @template, pretty: true}" end)
   end
 end

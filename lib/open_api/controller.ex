@@ -9,7 +9,7 @@ defmodule OpenAPI.Controller do
 
   @impl true
   def init(opts) do
-    Logger.info("[#{__MODULE__}] :: K8s controller up!")
+    Logger.info(fn -> "[#{__MODULE__}] :: K8s controller up!" end, ansi_color: :magenta)
 
     {:ok,
      %{
@@ -49,10 +49,15 @@ defmodule OpenAPI.Controller do
 
   @impl true
   def handle_sync(%ServiceList{items: items}, state) do
-    _procs =
+    procs =
       items
       |> Enum.filter(&Spec.is_target?/1)
       |> Enum.map(&handle(:added, &1, state))
+
+    Logger.debug(
+      fn -> "[#{__MODULE__}] Synced OpenAPI enabled services. Got: #{length(procs)}" end,
+      ansi_color: :blue
+    )
 
     state
   end
@@ -60,16 +65,26 @@ defmodule OpenAPI.Controller do
   # Added/modfied is the same since we replace the entry in the store
   defp handle(:added, object, _state), do: handle(:modified, object, _state)
 
-  defp handle(:modified, object, _state) do
-    Logger.info(fn -> "[#{__MODULE__}] ADDED :: #{inspect(object)}" end)
+  defp handle(:modified, %Service{metadata: metadata} = object, _state) do
+    Logger.debug(
+      fn ->
+        "[#{__MODULE__}] :: Service #{metadata.name}/#{metadata.namespace} modified / added"
+      end,
+      ansi_color: :blue
+    )
 
     object
     |> Spec.new()
     |> Specs.put_spec()
   end
 
-  defp handle(:deleted, object, _state) do
-    Logger.info(fn -> "[#{__MODULE__}] DLEETED :: #{inspect(object)}" end)
+  defp handle(:deleted, %Service{metadata: metadata} = object, _state) do
+    Logger.debug(
+      fn ->
+        "[#{__MODULE__}] :: #{metadata.name}/#{metadata.namespace} deleted. Attempt remove..."
+      end,
+      ansi_color: :blue
+    )
 
     object
     |> Spec.new()

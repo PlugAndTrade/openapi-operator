@@ -4,8 +4,8 @@ defmodule OpenAPI.TemplateTest do
   alias OpenAPI.Template
 
   setup do
-
-    {file, params} = :open_api
+    {file, params} =
+      :open_api
       |> Confex.fetch_env!(:template)
       |> Keyword.pop(:file)
 
