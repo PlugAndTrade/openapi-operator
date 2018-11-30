@@ -42,3 +42,7 @@ config :open_api,
     version: {:system, "OPEN_API_TEMPLATE_VERSION", "v1"},
     x_logo_url: {:system, "OPEN_API_TEMPLATE_LOGO_URL", "http://plug-n-trade.com/img/about/pnt_ampersand.png"}
   ]
+
+if File.exists?(Path.join(__DIR__, "#{Mix.env()}.exs")) do
+  import_config "#{Mix.env()}.exs"
+end
