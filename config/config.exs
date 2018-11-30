@@ -35,7 +35,7 @@ config :open_api,
     mode: {:system, :atom, "K8S_MODE", :proxy}
   ],
   template: [
-    file: {:system, "OPEN_API_TEMPLATE_FILE_PATH", "priv/templates/base.yaml.eex"},
+    file: {:system, "OPEN_API_TEMPLATE_FILE_PATH", "/var/open_api/templates/base.yaml.eex"},
     title: {:system, "OPEN_API_TEMPLATE_TITLE", "OpenAPI Example"},
     host: {:system, "OPEN_API_TEMPLATE_HOST", "api-openapi.example.com"},
     base_path: {:system, "OPEN_API_TEMPLATE_BASEPATH", "/"},

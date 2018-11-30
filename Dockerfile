@@ -23,10 +23,11 @@ FROM alpine
 
 RUN apk add --no-cache bash ncurses-libs libcrypto1.0 tzdata jq
 
-RUN mkdir -p /open_api /tmp /etc/open_api
+RUN mkdir -p /open_api /tmp /etc/open_api /var/open_api/templates
 WORKDIR /open_api
 
 COPY --from=0 /app/open_api/_build/prod/rel/open_api/releases/latest/open_api.tar.gz /tmp/
+COPY --from=0 /app/open_api/priv/templates/base.yaml.eex /var/open_api/templates/base.yaml.eex
 RUN tar xvzf /tmp/open_api.tar.gz && rm -f /tmp/open_api.tar.gz
 
 ENV REPLACE_OS_VARS true
