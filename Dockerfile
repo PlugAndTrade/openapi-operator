@@ -1,6 +1,6 @@
 FROM elixir:1.7-alpine
 
-RUN apk add --no-cache curl git gawk build-base jq
+RUN apk add --no-cache curl git build-base
 
 RUN mkdir -p /app/open_api
 WORKDIR /app/open_api
