@@ -21,6 +21,7 @@ info:
 
     # How it works
     The controller listens for changes to any k8s services which has the annotation:
+
     ```yaml
     swagger.io/docs: true
     ```
@@ -28,7 +29,7 @@ info:
     (in the bottom of `info.description`).
     Any requests for the annoted service swagger docs are proxied and rendered by the controller.
     Removing the service annotations, the service or setting `swagger.io/docs: false` will result in the
-    API being removed from this document
+    API being removed from this document.
     <!-- ReDoc-Inject: <security-definitions> -->
   version: v1
   title: <%= title %>
@@ -42,8 +43,8 @@ info:
     name: TBA
     url: ''
 externalDocs:
-  description: Find out how to create Github repo for your OpenAPI spec.
-  url: 'https://github.com/Rebilly/generator-openapi-repo'
+  description: Getting started with the OpenAPI specification to describe your APIs.
+  url: 'https://swagger.io/tools/open-source/getting-started/'
 x-servers:
   - url: //example.io/v2
     description: Default server
