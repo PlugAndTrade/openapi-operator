@@ -28,7 +28,7 @@ defmodule OpenAPI.MixProject do
       {:poison, "~> 4.0.1"},
       {:httpoison, "~> 1.4"},
       {:netex,
-       git: "https://github.com/drowzy/netex", ref: "050b4226d0aab068b0a5eef4158ba1c9303c73ac"},
+       git: "https://github.com/drowzy/netex", ref: "2730a3f193cfefafaf2c3323d0b89889b95d0dee"},
       {:plug, "~> 1.7"},
       {:plug_cowboy, "~> 2.0"},
       {:distillery, "~> 2.0", runtime: false}
