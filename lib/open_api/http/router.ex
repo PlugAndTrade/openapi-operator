@@ -31,7 +31,7 @@ defmodule OpenAPI.HTTP.Router do
   get "/swagger.json" do
     body =
       [
-        apis: Enum.map(Specs.take_all(), &{Spec.name(&1), "/#{Spec.fqdn(&1)}/swagger.json"})
+        apis: Enum.map(Specs.take_all(), &{Spec.name(&1), "/#{Spec.fqdn(&1)}"})
       ]
       |> OpenAPI.Template.Renderer.compile()
       |> Poison.encode!()
