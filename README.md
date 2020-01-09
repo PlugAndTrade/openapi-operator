@@ -12,7 +12,7 @@ The following environment variables are available to customize the template:
 
 | Env                           | Description                                                                             | Values        |
 | -------------                 | :-------------:                                                                         | -----:        |
-| `OPEN_API_TEMPLATE_FILE_PATH` | Path to a `swagger.yaml` to use a base template. default `priv/tmeplates/base.yaml.eex` | `<file_path>` |
+| `OPEN_API_TEMPLATE_FILE_PATH` | Path to a `swagger.yaml` to use a base template. default `priv/templates/base.yaml.eex` | `<file_path>` |
 | `OPEN_API_TEMPLATE_TITLE`     | Base template title. default: `OpenAPI example`                                         | `<string>`    |
 | `OPEN_API_TEMPLATE_HOST`      | Base template host. default `api-openapi.example.com`                                   | `<string>`    |
 | `OPEN_API_TEMPLATE_BASEPATH`  | Base template basepath. default `/`                                                     | `<url_path>`  |
