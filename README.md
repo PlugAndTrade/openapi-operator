@@ -21,8 +21,20 @@ The following environment variables are available to customize the template:
 
 The following environment variables are available for runtime configuration:
 
-### Base Template
-* TODO
+## Base Template
+
+The base template is the root Open API document, it serves as a landing page for all collected Open API specifications.
+It is customizable, but it is recommended to override it with your own template.
+
+The controller listens for changes to any k8s services which has the annotation:
+
+```yaml
+  swagger.io/docs: true
+```
+
+Based on the annotation the Open API document is collected and a link is injected at the bottom of the base template (bottom of `info.description`).
+The hyperlink proxies the service documentation and rendered by the controller.  Any requests performed will be proxied as well.
+
 ## Configure targets
 | ## Configure targets |
 
@@ -33,7 +45,6 @@ The following environment variables are available for runtime configuration:
 | `"swagger.io/version"` | Swagger version. default `v2`                  | `<string>`    |
 | `"swagger.io/port"`    | Http port. default `80`                        | `<int>`       |
 
-### TODO
 ## Developing
 
 ### Prerequisites
@@ -57,4 +68,3 @@ mix compile
 * Running
 
 `iex -S mix`
-
